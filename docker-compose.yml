@@ -21,15 +21,15 @@ services:
     depends_on:
       - axpert
     restart: unless-stopped
-  localtunnel-axpert:
-    build:
-      context: .
-      dockerfile: lt.Dockerfile
-    command: lt --port 8082 --subdomain mining-axpert-api
-    network_mode: host
-    depends_on:
-      - web-server
-    restart: unless-stopped
+  # localtunnel-axpert:
+  #   build:
+  #     context: .
+  #     dockerfile: lt.Dockerfile
+  #   command: lt --port 8082 --subdomain mining-axpert-api
+  #   network_mode: host
+  #   depends_on:
+  #     - web-server
+  #   restart: unless-stopped
   tapo-api:
     image: clementnerma/tapo-rest
     ports:
@@ -43,14 +43,23 @@ services:
   #   command: lt --port 8081 --subdomain mining-tapo
   #   network_mode: host
   #   restart: unless-stopped
-  ngrok:
+  ngrok-axpert:
     container_name: ngrok
     image: ngrok/ngrok:latest
-    command: [ "http", "--domain=${NGROK_STATIC_DOMAIN}", "9000" ]
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN}", "8082" ]
     network_mode: host
     environment:
-      - NGROK_AUTHTOKEN
-      - NGROK
-      - NGROK_STATIC_DOMAIN
+      - NGROK_AUTHTOKEN_AXPERT
+      - NGROK_STATIC_DOMAIN_AXPERT
+    volumes:
+      - ./src:/app/src
+  ngrok-tapo:
+    container_name: ngrok
+    image: ngrok/ngrok:latest
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN}", "8081" ]
+    network_mode: host
+    environment:
+      - NGROK_AUTHTOKEN_TAPO
+      - NGROK_STATIC_DOMAIN_TAPO
     volumes:
       - ./src:/app/src
