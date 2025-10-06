@@ -4,11 +4,13 @@ services:
       context: .
       dockerfile: Dockerfile
     devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
-    workdir: /home/axpert
+      - /dev/hidraw0:/dev/hidraw0
+    working_dir: /home/axpert
+    user: root
+    restart: unless-stopped
     volumes:
       - ./web:/web
-      - ./collect-data.sh:/app/collect-data.sh
+      - ./collect-data.sh:/app/collect-data.sh:ro
     command: bash /app/collect-data.sh
   web-server:
     image: nginx:alpine
@@ -20,8 +22,10 @@ services:
       - axpert
     restart: unless-stopped
   localtunnel-axpert:
-    image: localtunnel/localtunnel
-    command: lt --port 8082 --subdomain mining-axpert
+    build:
+      context: .
+      dockerfile: lt.Dockerfile
+    command: lt --port 8082 --subdomain mining-axpert-api
     network_mode: host
     depends_on:
       - web-server
@@ -29,13 +33,13 @@ services:
   tapo-api:
     image: clementnerma/tapo-rest
     ports:
-      - "8081:8080"
+      - "8081:80"
     volumes:
       - ./devices.json:/app/devices.json
   localtunnel-tapo:
-    image: localtunnel/localtunnel
+    build:
+      context: .
+      dockerfile: lt.Dockerfile
     command: lt --port 8081 --subdomain mining-tapo
     network_mode: host
-    depends_on:
-      - tapo-api
     restart: unless-stopped

@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
     pkg-config \
     udev \
-    python3-dev
+    python3-dev \
+    libudev-dev
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
