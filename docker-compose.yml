@@ -50,7 +50,7 @@ services:
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_AXPERT}
-      - url=${NGROK_STATIC_DOMAIN_AXPERT}
+      - NGROK_STATIC_DOMAIN_AXPERT
     volumes:
       - ./src:/app/src
   ngrok-tapo:
@@ -60,6 +60,6 @@ services:
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_TAPO}
-      - url=${NGROK_STATIC_DOMAIN_TAPO}
+      - NGROK_STATIC_DOMAIN_TAPO
     volumes:
       - ./src:/app/src
