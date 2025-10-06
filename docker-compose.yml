@@ -46,7 +46,7 @@ services:
   ngrok-axpert:
     container_name: ngrok-axpert
     image: ngrok/ngrok:latest
-    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "--inspect-addr=0.0.0.0:4040", "8082" ]
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "--web-addr=0.0.0.0:4040", "8082" ]
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_AXPERT}
@@ -54,7 +54,7 @@ services:
   ngrok-tapo:
     container_name: ngrok-tapo
     image: ngrok/ngrok:latest
-    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_TAPO}", "--inspect-addr=0.0.0.0:4041", "8081" ]
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_TAPO}", "--web-addr=0.0.0.0:4041", "8081" ]
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_TAPO}
