@@ -46,7 +46,7 @@ services:
   ngrok-axpert:
     container_name: ngrok
     image: ngrok/ngrok:latest
-    command: [ "http", "--url=${NGROK_STATIC_DOMAIN}", "8082" ]
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "8082" ]
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN_AXPERT
@@ -56,7 +56,7 @@ services:
   ngrok-tapo:
     container_name: ngrok
     image: ngrok/ngrok:latest
-    command: [ "http", "--url=${NGROK_STATIC_DOMAIN}", "8081" ]
+    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_TAPO}", "8081" ]
     network_mode: host
     environment:
       - NGROK_AUTHTOKEN_TAPO
