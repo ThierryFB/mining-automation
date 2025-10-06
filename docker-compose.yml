@@ -44,6 +44,7 @@ services:
   #   network_mode: host
   #   restart: unless-stopped
   ngrok-axpert:
+    restart: unless-stopped
     container_name: ngrok-axpert
     image: ngrok/ngrok:latest
     command:
@@ -56,6 +57,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
   ngrok-tapo:
+    restart: unless-stopped
     container_name: ngrok-tapo
     image: ngrok/ngrok:latest
     command:
