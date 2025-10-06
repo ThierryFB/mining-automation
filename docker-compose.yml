@@ -49,8 +49,8 @@ services:
     command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "8082" ]
     network_mode: host
     environment:
-      - NGROK_AUTHTOKEN_AXPERT
-      - NGROK_STATIC_DOMAIN_AXPERT
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_AXPERT}
+      - url=${NGROK_STATIC_DOMAIN_AXPERT}
     volumes:
       - ./src:/app/src
   ngrok-tapo:
@@ -59,7 +59,7 @@ services:
     command: [ "http", "--url=${NGROK_STATIC_DOMAIN_TAPO}", "8081" ]
     network_mode: host
     environment:
-      - NGROK_AUTHTOKEN_TAPO
-      - NGROK_STATIC_DOMAIN_TAPO
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_TAPO}
+      - url=${NGROK_STATIC_DOMAIN_TAPO}
     volumes:
       - ./src:/app/src
