@@ -46,11 +46,15 @@ services:
   ngrok-axpert:
     container_name: ngrok-axpert
     image: ngrok/ngrok:latest
-    command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "8082" ]
-    network_mode: host
+    command:
+      - "http"
+      - "http://host.docker.internal:8082"
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_AXPERT}
-      - NGROK_STATIC_DOMAIN_AXPERT
+    ports:
+      - 4040:4040
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   ngrok-tapo:
     container_name: ngrok-tapo
     image: ngrok/ngrok:latest
@@ -59,7 +63,6 @@ services:
       - "http://host.docker.internal:8081"
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_TAPO}
-      - NGROK_STATIC_DOMAIN_TAPO
     ports:
       - 4041:4040
     extra_hosts:
