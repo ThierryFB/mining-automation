@@ -51,8 +51,8 @@ services:
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_AXPERT}
       - NGROK_STATIC_DOMAIN_AXPERT
-    volumes:
-      - ./src:/app/src
+    ports:
+      - "4040:4040"
   ngrok-tapo:
     container_name: ngrok-tapo
     image: ngrok/ngrok:latest
@@ -61,5 +61,5 @@ services:
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN_TAPO}
       - NGROK_STATIC_DOMAIN_TAPO
-    volumes:
-      - ./src:/app/src
+    ports:
+      - "4041:4040"
