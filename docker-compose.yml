@@ -62,3 +62,5 @@ services:
       - NGROK_STATIC_DOMAIN_TAPO
     ports:
       - 4041:4040
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
