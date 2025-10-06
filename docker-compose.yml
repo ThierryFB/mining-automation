@@ -44,7 +44,7 @@ services:
   #   network_mode: host
   #   restart: unless-stopped
   ngrok-axpert:
-    container_name: ngrok
+    container_name: ngrok-axpert
     image: ngrok/ngrok:latest
     command: [ "http", "--url=${NGROK_STATIC_DOMAIN_AXPERT}", "8082" ]
     network_mode: host
@@ -54,7 +54,7 @@ services:
     volumes:
       - ./src:/app/src
   ngrok-tapo:
-    container_name: ngrok
+    container_name: ngrok-tapo
     image: ngrok/ngrok:latest
     command: [ "http", "--url=${NGROK_STATIC_DOMAIN_TAPO}", "8081" ]
     network_mode: host
