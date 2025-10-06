@@ -36,10 +36,21 @@ services:
       - "8081:80"
     volumes:
       - ./devices.json:/app/devices.json
-  localtunnel-tapo:
-    build:
-      context: .
-      dockerfile: lt.Dockerfile
-    command: lt --port 8081 --subdomain mining-tapo
+  # localtunnel-tapo:
+  #   build:
+  #     context: .
+  #     dockerfile: lt.Dockerfile
+  #   command: lt --port 8081 --subdomain mining-tapo
+  #   network_mode: host
+  #   restart: unless-stopped
+  ngrok:
+    container_name: ngrok
+    image: ngrok/ngrok:latest
+    command: [ "http", "--domain=${NGROK_STATIC_DOMAIN}", "9000" ]
     network_mode: host
-    restart: unless-stopped
+    environment:
+      - NGROK_AUTHTOKEN
+      - NGROK
+      - NGROK_STATIC_DOMAIN
+    volumes:
+      - ./src:/app/src
